@@ -10,6 +10,8 @@ gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "bootstrap-sass", "~> 3.3.4"
 gem "autoprefixer-rails"
+gem "figaro"
+gem "omniauth-github"
 
 group :development, :test do
   gem "pry"

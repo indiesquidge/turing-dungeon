@@ -3,16 +3,30 @@
 
     <div class="navbar-header">
       <div class="navbar-brand">
-        <%= link_to image_tag("turing-t.png", size: "20"), "#" %>
+        <%= link_to image_tag("turing-t.png", size: "20"), root_path %>
       </div>
     </div> <!-- navbar-header -->
 
     <ul class="nav navbar-nav navbar-right text-right">
-      <li>
-        <%= link_to "#", id: "github-login" do %>
-          <i class="mega-octicon octicon-mark-github"></i>
-        <% end %>
-      </li>
+      <% if current_user %>
+        <div class="dropdown">
+          <a data-toggle="dropdown">
+            <li>
+              <%= image_tag(current_user.image_url, size: "48", class: "img-responsive img-circle avatar") %>
+            </li>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Profile", profile_path %></li>
+            <li><%= link_to "Logout", logout_path, method: :delete %></li>
+          </ul>
+        </div>
+      <% else %>
+        <li>
+          <%= link_to "/auth/github", id: "github-login" do %>
+            <i class="mega-octicon octicon-mark-github"></i>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
 
   </div> <!-- container nav -->
