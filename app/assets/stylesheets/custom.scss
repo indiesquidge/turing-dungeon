@@ -1,0 +1,20 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@font-face {
+  font-family: Avenir;
+  src: local("./fonts/AvenirNextLTPro-Regular.otf")
+}
+
+body {
+  font-family: Avenir;
+}
+
+.navbar-brand {
+  padding-left: 30px;
+}
+
+#github-login {
+  color: black;
+  padding: 9px;
+}
