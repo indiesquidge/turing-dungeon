@@ -10,8 +10,16 @@ body {
   font-family: Avenir;
 }
 
+li {
+  list-style: none;
+}
+
 .navbar-brand {
   padding-left: 30px;
+}
+
+.well.well-sm h3 {
+  margin: 0;
 }
 
 #github-login {

@@ -2,15 +2,28 @@
   <h1 class="text-center">Turing Dungeon</h1>
   <div class="row">
 
-    <div class="col-md-7">
-      <h3>Last Five Commits</h3>
-      <ul id="github-feed">
-        <li>here is a commit</li>
-      </ul>
+    <div class="col-md-7" id="github-feed">
+      <h2>Lastest Community Commits</h2>
+      <% 5.times do %>
+        <div class="well well-sm">
+          <ul class="list-inline">
+            <li class="col-sm-1 col-xs-2">
+              <% if current_user %>
+                <%= image_tag(current_user.image_url, size: "50", class: "img-responsive img-circle") %>
+              <% else %>
+                <i class="mega-octicon octicon-mark-github"></i>
+              <% end %>
+            </li>
+            <li><h3>Austin Wood</h3></li></br>
+            <li><h6>indiesquidge/turing-dungeon</h6></li>
+          </ul>
+          <li><h4>This is the commit message that will be displayed</h4></li>
+        </div>
+      <% end %>
     </div>
-    <div class="col-md-4 col-md-offset-1">
-      <h3>OHDungeon</h3>
-      <ul id="twitter-feed">
+    <div class="col-md-4 col-md-offset-1" id="twitter-feed">
+      <h2>Turing Twitter</h2>
+      <ul>
         <li>here is a tweet</li>
       </ul>
     </div>
