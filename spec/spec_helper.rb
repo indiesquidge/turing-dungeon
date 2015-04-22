@@ -1,7 +1,9 @@
 require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
+require "simplecov"
 require "capybara/rspec"
+
+CodeClimate::TestReporter.start
+SimpleCov.start "rails"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
