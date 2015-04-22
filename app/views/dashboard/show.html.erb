@@ -3,13 +3,13 @@
   <div class="row">
 
     <div class="col-md-7" id="github-feed">
-      <h2>Lastest Community Commits</h2>
+      <h2 class="text-center">Lastest Community Commits</h2>
       <% 5.times do %>
         <div class="well well-sm">
           <ul class="list-inline">
             <li class="col-sm-1 col-xs-2">
               <% if current_user %>
-                <%= image_tag(current_user.image_url, size: "50", class: "img-responsive img-circle") %>
+                <%= link_to image_tag(current_user.image_url, size: "50", class: "img-responsive img-circle"), profile_path %>
               <% else %>
                 <i class="mega-octicon octicon-mark-github"></i>
               <% end %>
