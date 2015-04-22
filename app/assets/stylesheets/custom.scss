@@ -29,6 +29,17 @@ li {
   margin: 0;
 }
 
+#twitter-feed > .well {
+  background-color: white;
+  border-radius: 0;
+  border-top: none;
+  margin: 0;
+}
+
+#twitter-feed > .well p {
+  margin: 15px auto auto 0;
+}
+
 #github-login {
   color: black;
   padding: 9px;
