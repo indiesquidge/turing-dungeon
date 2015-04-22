@@ -1,13 +1,11 @@
 <nav class="navbar navbar-default">
   <div class="container">
 
-    <div class="navbar-header">
-      <div class="navbar-brand">
-        <%= link_to image_tag("turing-t.png", size: "20"), root_path %>
-      </div>
-    </div> <!-- navbar-header -->
+    <div class="navbar-brand">
+      <%= link_to image_tag("turing-t.png", size: "20"), root_path %>
+    </div>
 
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-right pull-right">
       <% if current_user %>
         <li class="dropdown">
           <a data-toggle="dropdown" id="user-profile">
