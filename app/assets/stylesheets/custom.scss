@@ -6,8 +6,15 @@
   src: local("./fonts/AvenirNextLTPro-Regular.otf")
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: Avenir;
+  // Margin bottom by footer height
+  margin-bottom: 60px;
 }
 
 li {
@@ -29,4 +36,12 @@ li {
 
 #user-profile {
   padding: 7px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  // Set the fixed height of the footer
+  height: 60px;
 }
