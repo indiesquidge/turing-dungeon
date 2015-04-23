@@ -16,6 +16,7 @@ gem "omniauth-github"
 gem "faker"
 gem "responders", "~> 2.0"
 gem "faraday"
+gem "angularjs-rails"
 
 group :development, :test do
   gem "pry"
