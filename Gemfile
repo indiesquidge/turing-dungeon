@@ -12,6 +12,7 @@ gem "bootstrap-sass", "~> 3.3.4"
 gem "autoprefixer-rails"
 gem "figaro"
 gem "omniauth-github"
+gem "faker"
 
 group :development, :test do
   gem "pry"
