@@ -1,0 +1,19 @@
+<div class="container">
+  <section ng-controller="UserController">
+    <form ng-sumbit="add()">
+      <div class="text-left">
+        <input type="text" ng-model="currentTodo" />
+        <button ng-click="add()">Add</button>
+        <ul>
+          <li ng-repeat="item in todoList">
+            {{item.name}}
+            <button ng-click="delete($index)">Delete</button>
+            <input type="checkbox" ng-click="finished($index)">
+            <span ng-show="item.complete">Finished</span>
+            <span ng-show="!item.complete">Not Finished</span>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </section>
+</div>
