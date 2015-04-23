@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get    "/profile", to: "users#show"
 
+  get    "/angular", to: "angular#show"
+
   namespace :api do
     resources :users,   only: [:show, :index]
   end
