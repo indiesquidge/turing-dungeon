@@ -4,32 +4,28 @@
 
     <div class="col-md-7" id="github-feed">
       <h2 class="text-center">Lastest Community Commits</h2>
-      <% 5.times do %>
+      <% @commits.each do |commit| %>
         <div class="well well-sm">
           <ul class="list-inline">
             <li class="col-sm-1 col-xs-2">
-              <% if current_user %>
-                <%= link_to image_tag(current_user.image_url, size: "50", class: "img-responsive img-circle"), profile_path %>
-              <% else %>
-                <i class="mega-octicon octicon-mark-github"></i>
-              <% end %>
+              <%= link_to image_tag(commit.user.image_url, size: "50", class: "img-responsive img-circle"), root_path %>
             </li>
-            <li><h3>Austin Wood</h3></li></br>
-            <li><h6>indiesquidge/turing-dungeon</h6></li>
+            <li><h3><%= commit.user.nickname %></h3></li></br>
+            <li><h6><%= commit.user.nickname %>/<%= commit.repo %></h6></li>
           </ul>
-          <li><h4>This is the commit message that will be displayed</h4></li>
+          <li><h4><%= commit.message %></h4></li>
         </div>
       <% end %>
     </div>
     <div class="col-md-4 col-md-offset-1" id="twitter-feed">
       <h2 class="text-center">Turing Twitter</h2>
-      <% 5.times do |i| %>
+      <% @tweets.each do |tweet| %>
         <div class="well well-sm">
           <ul class="list-inline">
-            <li><%= link_to image_tag("favicon.ico", size: "30"), root_path %></li>
-            <li><h4>OHDungeon</h4></li>
-            <li class="pull-right"><p><%= i * 3 + rand(1..4) %>m</p></li></br>
-            <li><p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men.</p></li>
+            <li><%= link_to image_tag(tweet.image_url, size: "30"), root_path %></li>
+            <li><h4><%= tweet.owner %></h4></li>
+            <li class="pull-right"><p><%= 2 * 3 + rand(1..4) %>m</p></li></br>
+            <li><p><%= tweet.message %></p></li>
           </ul>
         </div>
       <% end %>
