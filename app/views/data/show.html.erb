@@ -5,6 +5,7 @@
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://underscorejs.org/underscore.js" charset="utf-8"></script>
     <style type="text/css">
+
       .bar {
         display: inline-block;
         width: 20px;
@@ -17,7 +18,12 @@
         fill: purple;
         fill-opacity: 0.5;
         stroke: black;
-        stroke-weight: 1px;
+      }
+
+      .active {
+        fill: blue;
+        fill-capacity: 0.5;
+        stroke-width: 3px;
       }
 
     </style>
@@ -111,6 +117,18 @@
         })
         .attr("r", function(d) {
           return d.r;
+        })
+        .on("mouseover", function(d) {
+          d3.select(this).classed("active", true);
+        })
+        .on("mouseout", function(d) {
+          d3.select(this).classed("active", false);
+        })
+        .on("mousedown", function(d) {
+          d3.select(this).attr("r", d.r * 2);
+        })
+        .on("mouseup", function(d) {
+          d3.select(this).attr("r", d.r);
         });
 
     </script>
