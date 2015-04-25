@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D3 - Data Driven Documents</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <style type="text/css">
+
+      body
+      {
+        padding-top: 50px;
+        padding-left: 100px;
+      }
+
+      .bar
+      {
+        display: inline-block;
+        width: 20px;
+        height: 75px; /* Gets overriden by D3-assigned height below */
+        margin-right: 2px;
+        background-color: teal;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var dataset = [ 5, 10, 15, 20, 25, 40 ];
+
+      // this will define where we want to make our graph
+      // and then select all divs in that area
+      d3.select('body').selectAll('div')
+        // this is the data we want the graph to use
+        .data(dataset)
+        // enter() will be hit whenever we find a data element that doesn't have
+        // a corresponding UI element
+        .enter()
+        // when we hit this enter, we should append a div to each data element
+        .append('div')
+        // set an attribute, in this case the class, which is defined above
+        .attr('class', 'bar')
+        // dynamically render the height based on the data value
+        .style('height', function (d) {
+          return d * 5 + 'px';
+        });
+
+    </script>
+  </body>
+</html>
