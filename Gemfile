@@ -21,6 +21,9 @@ group :development, :test do
   gem "rspec-rails"
   gem "capybara"
   gem "launchy"
+  gem "pry-rails"
+  gem "pry-toys"
+  gem "awesome_print", require: "ap"
 end
 
 group :test do
