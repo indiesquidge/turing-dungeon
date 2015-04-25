@@ -32,6 +32,7 @@
     <div class="container">
       <div class="col-sm-6 text-center" id="barChartArea"></div>
       <div class="col-sm-6 text-center" id="bubbleChartArea"></div>
+      <button class="btn btn-primary col-sm-offset-7" onclick="update()">Update</button>
     </div>
     <script type="text/javascript">
 
@@ -75,6 +76,33 @@
         .attr("fill", colorScale);
 
 // =============================================================================
+
+      function update() {
+        _.each(bubbleDataset, function(datum) {
+          datum.x =  Math.round(Math.random() * 100);
+          datum.y =  Math.round(Math.random() * 100);
+          datum.r =  Math.round(5 + Math.random() * 10);
+        })
+        svg.selectAll("circle")
+           .transition()
+           .duration(500)
+           .attr("cx", function(d) {
+             return xBubbleScale(d.x);
+           })
+           .style("fill", "red")
+           .transition()
+           .duration(500)
+           .attr("cy", function(d) {
+             return yBubbleScale(d.y);
+           })
+           .style("fill", "green")
+           .transition()
+           .duration(500)
+           .attr("r", function(d) {
+             return d.r;
+           })
+           .style("fill", "blue");
+      }
 
       var bubbleDataset = _.map(_.range(15), function(i) {
         return{
