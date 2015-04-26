@@ -159,14 +159,8 @@
                  d3.select(this).attr("r", d.r);
                });
 
-      function update() {
-        _.each(bubbleDataset, function(datum) {
-          datum.x =  Math.round(Math.random() * 100);
-          datum.y =  Math.round(Math.random() * 100);
-          datum.r =  Math.round(5 + Math.random() * 10);
-        })
-        bubbleSvg.selectAll("circle")
-                 .transition()
+      function steppedTransition(selection) {
+        selection.transition()
                  .duration(500)
                  .attr("cx", function(d) {
                    return xBubbleScale(d.x);
@@ -184,6 +178,43 @@
                    return d.r;
                  })
                  .style("fill", "blue");
+      }
+
+      function plainTransition(selection, dur) {
+        selection.transition()
+                 .duration(dur)
+                 .attr("cx", function(d) {
+                   return xBubbleScale(d.x);
+                 })
+                 .attr("cy", function(d) {
+                   return yBubbleScale(d.y);
+                 })
+                 .attr("r", function(d) {
+                   return d.r;
+                 })
+                 .style("fill", "blue");
+      }
+
+      function newData(datum) {
+        datum.x =  Math.round(Math.random() * 100);
+        datum.y =  Math.round(Math.random() * 100);
+        datum.r =  Math.round(5 + Math.random() * 10);
+      }
+
+      function update() {
+        bubbleSvg.selectAll("circle")
+                 .filter(function(d) {
+                   return d.x < 50;
+                 })
+                 .each(newData)
+                 .call(plainTransition, 1500);
+
+        bubbleSvg.selectAll("circle")
+                 .filter(function(d) {
+                   return d.x > 50;
+                 })
+                 .each(newData)
+                 .call(steppedTransition);
       }
 
     </script>
