@@ -44,11 +44,11 @@
           w = 400 - margin.left - margin.right;
           h = 300 - margin.top - margin.bottom;
 
-      var svg = d3.select("#barChartArea").append("svg")
-                  .attr("width", w + margin.left + margin.right)
-                  .attr("height", h + margin.top + margin.bottom)
-                  .append("g")
-                  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+      var barSvg = d3.select("#barChartArea").append("svg")
+                     .attr("width", w + margin.left + margin.right)
+                     .attr("height", h + margin.top + margin.bottom)
+                     .append("g")
+                     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
       var xBarScale = d3.scale.ordinal()
                         .domain(barDataset)
@@ -62,20 +62,50 @@
                          .domain([0,d3.max(barDataset)])
                          .range(["blue", "purple"]);
 
-      svg.selectAll("rect")
-        .data(barDataset)
-        .enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", xBarScale)
-        .attr("y", function(d) {
-          return h - yBarScale(d);
-        })
-        .attr("width", xBarScale.rangeBand())
-        .attr("height", yBarScale)
-        .attr("fill", colorScale);
+      barSvg.selectAll("rect")
+            .data(barDataset)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", xBarScale)
+            .attr("y", function(d) {
+              return h - yBarScale(d);
+            })
+            .attr("width", xBarScale.rangeBand())
+            .attr("height", yBarScale)
+            .attr("fill", colorScale);
 
 // =============================================================================
+
+      var bubbleDataset = _.map(_.range(15), function(i) {
+        return {
+          x: Math.round(Math.random() * 100),
+          y: Math.round(Math.random() * 100),
+          r: Math.round(5 + Math.random() * 10)
+        };
+      });
+
+      var margin = { top: 20, right: 20, bottom: 60, left: 60 };
+          w = 400 - margin.left - margin.right;
+          h = 300 - margin.top - margin.bottom;
+
+      var bubbleSvg = d3.select("#bubbleChartArea").append("svg")
+                        .attr("width", w + margin.left + margin.right)
+                        .attr("height", h + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+      var xBubbleScale = d3.scale.linear()
+                           .domain([0,100])
+                           .range([0,w]);
+
+      var yBubbleScale = d3.scale.linear()
+                           .domain([0,100])
+                           .range([h,0]);
+
+      var margin = { top: 0, right: 0, bottom: 0, left: 0 };
+          w = 400 - margin.left - margin.right;
+          h = 300 - margin.top - margin.bottom;
 
       function update() {
         _.each(bubbleDataset, function(datum) {
@@ -83,81 +113,26 @@
           datum.y =  Math.round(Math.random() * 100);
           datum.r =  Math.round(5 + Math.random() * 10);
         })
-        svg.selectAll("circle")
-           .transition()
-           .duration(500)
-           .attr("cx", function(d) {
-             return xBubbleScale(d.x);
-           })
-           .style("fill", "red")
-           .transition()
-           .duration(500)
-           .attr("cy", function(d) {
-             return yBubbleScale(d.y);
-           })
-           .style("fill", "green")
-           .transition()
-           .duration(500)
-           .attr("r", function(d) {
-             return d.r;
-           })
-           .style("fill", "blue");
+        bubbleSvg.selectAll("circle")
+                 .transition()
+                 .duration(500)
+                 .attr("cx", function(d) {
+                   return xBubbleScale(d.x);
+                 })
+                 .style("fill", "red")
+                 .transition()
+                 .duration(500)
+                 .attr("cy", function(d) {
+                   return yBubbleScale(d.y);
+                 })
+                 .style("fill", "green")
+                 .transition()
+                 .duration(500)
+                 .attr("r", function(d) {
+                   return d.r;
+                 })
+                 .style("fill", "blue");
       }
-
-      var bubbleDataset = _.map(_.range(15), function(i) {
-        return{
-          x: Math.random() * 100,
-          y: Math.random() * 100,
-          r: Math.random() * 30
-        };
-      });
-
-      var xBubbleScale = d3.scale.linear()
-                           .domain([0,100])
-                           .range([0,w]);
-
-      var yBubbleScale = d3.scale.linear()
-                           .domain([0,d3.max(bubbleDataset, function(d) {
-                             return d.y;
-                           })])
-                           .range([h,0]);
-
-      var margin = { top: 0, right: 0, bottom: 0, left: 0 };
-          w = 400 - margin.left - margin.right;
-          h = 300 - margin.top - margin.bottom;
-
-      var svg = d3.select("#bubbleChartArea").append("svg")
-                  .attr("width", w + margin.left + margin.right)
-                  .attr("height", h + margin.top + margin.bottom)
-                  .append("g")
-                  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
-
-      svg.selectAll("circle")
-        .data(bubbleDataset)
-        .enter()
-        .append("circle")
-        .attr("class", "bubble")
-        .attr("cx", function(d) {
-          return xBubbleScale(d.x);
-        })
-        .attr("cy", function(d) {
-          return yBubbleScale(d.y);
-        })
-        .attr("r", function(d) {
-          return d.r;
-        })
-        .on("mouseover", function(d) {
-          d3.select(this).classed("active", true);
-        })
-        .on("mouseout", function(d) {
-          d3.select(this).classed("active", false);
-        })
-        .on("mousedown", function(d) {
-          d3.select(this).attr("r", d.r * 2);
-        })
-        .on("mouseup", function(d) {
-          d3.select(this).attr("r", d.r);
-        });
 
     </script>
   </body>
