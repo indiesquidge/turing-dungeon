@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :commits, except: [:new, :edit]
+    resources :users,   except: [:new, :edit]
   end
 end
