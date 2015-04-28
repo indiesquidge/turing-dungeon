@@ -14,6 +14,7 @@ gem "autoprefixer-rails"
 gem "figaro"
 gem "omniauth-github"
 gem "faker"
+gem "responders", "~> 2.0"
 
 group :development, :test do
   gem "pry"
