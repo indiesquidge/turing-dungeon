@@ -2,7 +2,6 @@ class Seed
   def call
     generate_users
     generate_commits
-    generate_tweets
   end
 
   def generate_users
@@ -21,15 +20,6 @@ class Seed
                               repo: Faker::App.name,
                               user_id: random_user.id)
       puts "Created Commit #{commit.id} for user #{random_user.id}"
-    end
-  end
-
-  def generate_tweets
-    10.times do
-      tweet = Tweet.create!(message: Faker::Lorem.sentence(3),
-                            owner: "OHDungeon",
-                            image_url: "favicon.ico")
-      puts "Created Tweet #{tweet.id} from #{tweet.owner}"
     end
   end
 
