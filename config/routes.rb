@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get    "/profile", to: "users#show"
 
   namespace :api do
-    resources :commits, except: [:new, :edit]
-    resources :users,   except: [:new, :edit]
+    resources :commits, only: [:show, :index]
+    resources :users,   only: [:show, :index]
   end
 end

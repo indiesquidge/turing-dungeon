@@ -10,22 +10,4 @@ class Api::CommitsController < ApplicationController
   def index
     respond_with Commit.all
   end
-
-  def create
-    respond_with Commit.create(commit_params)
-  end
-
-  def update
-    respond_with Commit.update(params[:id], commit_params)
-  end
-
-  def destroy
-    respond_with Commit.destroy(params[:id])
-  end
-
-  private
-
-  def commit_params
-    params.require(:commit).permit(:message, :repo)
-  end
 end
