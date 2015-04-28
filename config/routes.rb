@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   root   "dashboard#show"
 
   get    "/profile", to: "users#show"
+
+  namespace :api do
+    resources :commits, except: [:new, :edit]
+  end
 end
