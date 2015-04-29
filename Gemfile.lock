@@ -230,6 +230,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   faker
+  faraday
   figaro
   font-awesome-sass
   jbuilder (~> 2.0)
