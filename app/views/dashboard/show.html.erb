@@ -15,9 +15,7 @@
             <li><h3><%= link_to event.actor[:login], "https://github.com/#{event.actor[:login]}" %></h3></li></br>
             <li><h6><%= link_to event.repo[:name], "https://github.com/#{event.repo[:name]}" %></h6></li></br>
           </ul>
-          <% event.payload[:commits].each do |commit| %>
-            <li><h4><%= link_to commit[:message], root_url %></h4></li>
-          <% end %>
+          <li><h4><%= link_to event.payload[:commits][0][:message], root_url %></h4></li>
         </div>
       <% end %>
     </div>
