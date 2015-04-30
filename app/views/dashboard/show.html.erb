@@ -6,16 +6,16 @@
 
     <div class="col-md-6" id="github-feed">
       <h2 class="text-center">Lastest Community Commits</h2>
-      <% @commits.each do |commit| %>
+      <% @events.each do |event| %>
         <div class="well well-sm">
           <ul class="list-inline">
-            <li class="col-sm-1 col-xs-2">
-              <%= link_to image_tag(commit.user.image_url, size: "50", class: "img-responsive img-circle"), root_path %>
+            <li class="col-sm-2 col-xs-2 custom-col-sm">
+              <%= link_to image_tag(event.actor[:avatar_url], class: "img-responsive img-circle avatar"), "https://github.com/#{event.actor[:login]}" %>
             </li>
-            <li><h3><%= commit.user.nickname %></h3></li></br>
-            <li><h6><%= commit.user.nickname %>/<%= commit.repo %></h6></li>
+            <li><h3><%= link_to event.actor[:login], "https://github.com/#{event.actor[:login]}" %></h3></li></br>
+            <li><h6><%= link_to event.repo[:name], "https://github.com/#{event.repo[:name]}" %></h6></li></br>
           </ul>
-          <li><h4><%= commit.message %></h4></li>
+          <li><h4><%= link_to event.payload[:commits][0][:message], root_url %></h4></li>
         </div>
       <% end %>
     </div>

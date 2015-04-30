@@ -15,6 +15,7 @@ gem "figaro"
 gem "omniauth-github"
 gem "faker"
 gem "responders", "~> 2.0"
+gem "faraday"
 
 group :development, :test do
   gem "pry"
