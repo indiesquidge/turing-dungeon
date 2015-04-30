@@ -5,8 +5,10 @@ class GithubService
     @connection = Faraday.new(url: "https://api.github.com")
   end
 
-  def repo_commits(owner, repo)
-    parse(connection.get("repos/#{owner}/#{repo}/commits"))
+  def push_events
+    User.all.map do |user|
+      parse(connection.get("users/#{user.nickname}/events/public?per_page=5&client_id=#{ENV['GITHUB_ID']}&client_secret=#{ENV['GITHUB_SECRET']}"))
+    end.flatten.select { |event| event[:type] == "PushEvent" }
   end
 
   private
