@@ -10,7 +10,7 @@ class GithubService
       user_events = parse(connection.get("users/#{user.nickname}/events/public?per_page=5&client_id=#{ENV['GITHUB_ID']}&client_secret=#{ENV['GITHUB_SECRET']}"))
       user_events.select! { |event| event[:type] == "PushEvent" }
       user_events.each do |event|
-        event[:payload][:commits].select { |commit| commit[:author][:name] == user.name }.each do |commit|
+        event[:payload][:commits].select { |commit| commit[:author][:name] == user.name }.reverse_each do |commit|
           user.commits.create(repo: event[:repo][:name],
                               message: commit[:message],
                               sha: commit[:sha],
