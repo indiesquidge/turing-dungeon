@@ -5,17 +5,17 @@
   <div class="row">
 
     <div class="col-md-6" id="github-feed">
-      <h2 class="text-center">Lastest Community Commits</h2>
-      <% @events.each do |event| %>
+      <h2 class="text-center"><i class="mega-octicon octicon-git-commit"></i></h2>
+      <% @commits.each do |commit| %>
         <div class="well well-sm">
           <ul class="list-inline">
             <li class="col-sm-2 col-xs-2 custom-col-sm">
-              <%= link_to image_tag(event.actor[:avatar_url], class: "img-responsive img-circle avatar"), "https://github.com/#{event.actor[:login]}" %>
+              <%= link_to image_tag(commit.user.image_url, class: "img-responsive img-circle avatar"), "https://github.com/#{commit.user.nickname}" %>
             </li>
-            <li><h3><%= link_to event.actor[:login], "https://github.com/#{event.actor[:login]}" %></h3></li></br>
-            <li><h6><%= link_to event.repo[:name], "https://github.com/#{event.repo[:name]}" %></h6></li></br>
+            <li><h3><%= link_to commit.user.nickname, "https://github.com/#{commit.user.nickname}" %></h3></li></br>
+            <li><h6><%= link_to commit.repo, "https://github.com/#{commit.repo}" %></h6></li></br>
           </ul>
-          <li><h4><%= link_to event.payload[:commits][0][:message], root_url %></h4></li>
+          <li><h4><%= link_to commit.message, "https://github.com/#{commit.repo}/commit/#{commit.sha}" %></h4></li>
         </div>
       <% end %>
     </div>
