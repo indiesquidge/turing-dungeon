@@ -13,7 +13,7 @@ class Commit < ActiveRecord::Base
   end
 
   def self.latest_commits
-    # grab_commits_from_api
+    grab_commits_from_api
     order("created_at DESC").first(6)
   end
 end
