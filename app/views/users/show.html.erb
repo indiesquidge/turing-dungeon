@@ -1,6 +1,7 @@
 <div class="container">
   <div class="text-center">
     <%= image_tag current_user.image_url, size: "200", class: "img-circle img-thumbnail" %>
+    <h1><%= current_user.name %></h1>
     <h2><%= current_user.nickname %></h2>
     <h2><%= current_user.email %></h2>
   </div>

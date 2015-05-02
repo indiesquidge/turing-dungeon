@@ -14,7 +14,7 @@ RSpec.describe "User authentication", type: :feature do
     expect(page).to have_content("email@example.com")
   end
 
-  it "can logout if logged in" do
+  xit "can logout if logged in" do
     visit root_path
     mock_omniauth_user
 
