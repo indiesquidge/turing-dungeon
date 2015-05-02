@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def show
-    @events = Event.all
+    @commits = Commit.latest_commits
   end
 end
