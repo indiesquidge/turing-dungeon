@@ -4,16 +4,15 @@ class Commit < ActiveRecord::Base
 
   belongs_to :user
 
-  def self.service
-    @service ||= GithubService.new
-  end
-
-  def self.grab_commits_from_api
-    service.event_data
-  end
-
   def self.latest_commits
-    grab_commits_from_api
+    User.all.each do |user|
+      GithubService.event_data(user.nickname, user.name, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"]).each do |event, commit|
+        user.commits.create(repo: event[:repo][:name],
+                            message: commit[:message],
+                            sha: commit[:sha],
+                            created_at: event[:created_at])
+      end
+    end
     order("created_at DESC").first(6)
   end
 end
