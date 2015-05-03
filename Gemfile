@@ -32,4 +32,5 @@ end
 group :test do
   gem "codeclimate-test-reporter", require: nil
   gem "simplecov", require: false
+  gem "webmock", "~> 1.21"
 end
