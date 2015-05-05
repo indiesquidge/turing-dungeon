@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  force_ssl unless Rails.env.development?
+  force_ssl if Rails.env.production?
 
   respond_to :json, :xml
 
