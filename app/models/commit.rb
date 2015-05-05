@@ -1,5 +1,5 @@
 class Commit < ActiveRecord::Base
-  validates :repo, :message, :created_at, presence: true
+  validates :repo, :message, presence: true
   validates :sha, presence: true, uniqueness: true
 
   belongs_to :user
