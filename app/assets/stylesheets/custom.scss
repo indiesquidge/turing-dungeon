@@ -5,7 +5,12 @@
 
 @font-face {
   font-family: Avenir;
-  src: local("./fonts/AvenirNextLTPro-Regular.otf")
+  src: local("./fonts/AvenirNextLTPro-Regular.otf");
+}
+
+@font-face {
+  font-family: ScalaPro;
+  src: local("./fonts/ScalaPro.otf");
 }
 
 html {
@@ -17,6 +22,15 @@ body {
   font-family: Avenir;
   // Margin bottom by footer height
   margin-bottom: 60px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  font-family: ScalaPro;
+  font-size: 75px;
+  background: -webkit-linear-gradient(rgba(95, 225, 61, 0.5), #05c2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 li {
@@ -25,6 +39,15 @@ li {
 
 a {
   color: black;
+}
+
+.well.well-sm {
+  background-color: rgba(5, 194, 209, 0.2);
+  background-image:
+  linear-gradient(
+    to top right,
+    rgba(5, 194, 209, 0.4), rgba(95, 225, 61, 0.2)
+  );
 }
 
 .well.well-sm h3 {
