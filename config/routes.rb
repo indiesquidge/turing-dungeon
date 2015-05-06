@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root   "dashboard#show"
 
-  get    "/profile", to: "users#show"
+  get "/:username", to: "users#show", as: "user"
 
   namespace :api do
     resources :users,     only: [:show, :index]

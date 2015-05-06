@@ -15,4 +15,12 @@ class Commit < ActiveRecord::Base
     end
     order("created_at DESC").first(6)
   end
+
+  def message_url
+    "https://github.com/#{repo}/commit/#{sha}"
+  end
+
+  def repo_url
+    "https://github.com/#{repo}"
+  end
 end

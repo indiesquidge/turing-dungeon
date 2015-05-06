@@ -12,7 +12,7 @@
             <%= image_tag(current_user.image_url, size: "35", class: "img-responsive img-circle") %>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Profile", profile_path %></li>
+            <li><%= link_to "Profile", current_user %></li>
             <li><%= link_to "Logout", logout_path, method: :delete %></li>
           </ul>
         </li>

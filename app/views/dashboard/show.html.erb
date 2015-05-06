@@ -12,12 +12,12 @@
           <div id="commits">
             <ul class="list-inline">
               <li class="col-sm-2 col-xs-2 custom-col-sm">
-                <%= link_to image_tag(commit.user.image_url, class: "img-responsive img-circle avatar"), "https://github.com/#{commit.user.nickname}" %>
+                <%= link_to image_tag(commit.user.image_url, class: "img-responsive img-circle avatar"), commit.user.github_profile_url %>
               </li>
-              <li><h3><%= link_to commit.user.nickname, "https://github.com/#{commit.user.nickname}" %></h3></li></br>
-              <li><h6><%= link_to commit.repo, "https://github.com/#{commit.repo}" %></h6></li></br>
+              <li><h3><%= link_to commit.user.nickname, commit.user.github_profile_url %></h3></li></br>
+              <li><h6><%= link_to commit.repo, commit.repo_url %></h6></li></br>
             </ul>
-            <h4><%= link_to commit.message, "https://github.com/#{commit.repo}/commit/#{commit.sha}" %></h4>
+            <h4><%= link_to commit.message, commit.message_url %></h4>
           </div>
 
         </div>
