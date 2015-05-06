@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def github_profile_url
+    "https://github.com/#{nickname}"
+  end
+
   def to_param
     nickname
   end
