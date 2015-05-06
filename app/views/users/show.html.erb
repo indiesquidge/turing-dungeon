@@ -1,8 +1,21 @@
 <div class="container">
-  <div class="text-center">
-    <%= image_tag current_user.image_url, size: "200", class: "img-circle img-thumbnail" %>
-    <h1><%= current_user.name %></h1>
-    <h2><%= current_user.nickname %></h2>
-    <h2><%= current_user.email %></h2>
+  <div class="col-md-6">
+    <%= link_to image_tag(@user.image_url, size: "200", class: "img-circle img-thumbnail"), @user.github_profile_url %>
+    <h1><%= @user.name %></h1>
+    <h2><%= link_to @user.nickname, @user.github_profile_url %></h2>
+    <h2><%= @user.email %></h2>
+  </div>
+  <div class="col-md-6" id="github-feed">
+    <h2 class="text-center"><i class="mega-octicon octicon-git-commit"></i></h2>
+    <% @user.commits.each do |commit| %>
+      <div class="well well-sm">
+
+        <div id="user-commits">
+          <h4><%= link_to commit.message, commit.message_url %></h4></br>
+          <h5 class="text-right"><%= link_to commit.repo, commit.repo_url %></h5>
+        </div>
+
+      </div>
+    <% end %>
   </div>
 </div>
