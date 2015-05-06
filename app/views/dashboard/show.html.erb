@@ -1,21 +1,25 @@
 <%= render partial: "partials/user_voice" %>
 
 <div class="container">
-  <h1 class="text-center">Turing Dungeon</h1>
+  <h1 class="text-center">TURING DUNGEON</h1>
   <div class="row">
 
     <div class="col-md-6" id="github-feed">
       <h2 class="text-center"><i class="mega-octicon octicon-git-commit"></i></h2>
       <% @commits.each do |commit| %>
         <div class="well well-sm">
-          <ul class="list-inline">
-            <li class="col-sm-2 col-xs-2 custom-col-sm">
-              <%= link_to image_tag(commit.user.image_url, class: "img-responsive img-circle avatar"), "https://github.com/#{commit.user.nickname}" %>
-            </li>
-            <li><h3><%= link_to commit.user.nickname, "https://github.com/#{commit.user.nickname}" %></h3></li></br>
-            <li><h6><%= link_to commit.repo, "https://github.com/#{commit.repo}" %></h6></li></br>
-          </ul>
-          <li><h4><%= link_to commit.message, "https://github.com/#{commit.repo}/commit/#{commit.sha}" %></h4></li>
+
+          <div id="commits">
+            <ul class="list-inline">
+              <li class="col-sm-2 col-xs-2 custom-col-sm">
+                <%= link_to image_tag(commit.user.image_url, class: "img-responsive img-circle avatar"), "https://github.com/#{commit.user.nickname}" %>
+              </li>
+              <li><h3><%= link_to commit.user.nickname, "https://github.com/#{commit.user.nickname}" %></h3></li></br>
+              <li><h6><%= link_to commit.repo, "https://github.com/#{commit.repo}" %></h6></li></br>
+            </ul>
+            <h4><%= link_to commit.message, "https://github.com/#{commit.repo}/commit/#{commit.sha}" %></h4>
+          </div>
+
         </div>
       <% end %>
     </div>
