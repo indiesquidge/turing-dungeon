@@ -18,7 +18,7 @@ end
 private
 
 def stubbed_github_service_request
-  stub_request(:get, "https://api.github.com/users/ClassicRichard/events/public?client_id=&client_secret=&per_page=5")
+  stub_request(:get, "https://api.github.com/users/ClassicRichard/events/public?client_id=#{ENV['GITHUB_ID']}&client_secret=#{ENV['GITHUB_SECRET']}&per_page=5")
     .with(headers: {"Accept"=>"*/*", "Accept-Encoding"=>"gzip;q=1.0,deflate;q=0.6,identity;q=0.3", "User-Agent"=>"Faraday v0.9.1"})
     .to_return(status: 200, body: <<-JSON)
       [ { "type":       "PushEvent",
