@@ -4,7 +4,7 @@ class GithubService
     user_events = parse(connection.get("users/#{nickname}/events/public?per_page=5&client_id=#{github_id}&client_secret=#{github_secret}"))
     user_events.select! { |event| event[:type] == "PushEvent" }
     user_events.flat_map do |event|
-      event[:payload][:commits].select { |commit| commit[:author][:name] == name }.reverse.map { |commit| [event, commit] }
+      event[:payload][:commits].reverse.select { |commit| commit[:author][:name] == name }.map { |commit| [event, commit] }
     end
   end
 
