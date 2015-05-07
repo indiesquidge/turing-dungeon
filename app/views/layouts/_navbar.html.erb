@@ -6,15 +6,10 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right pull-right">
-      <li>
-        <%= link_to graph_path do %>
-          <i class="mega-octicon octicon-graph"></i>
-        <% end %>
-      </li>
       <li class="dropdown">
         <a data-toggle="dropdown" id="cohort-list"><i class="mega-octicon octicon-organization"></i></a>
         <ul class="dropdown-menu">
-          <% Cohort.all.each do |cohort| %>
+          <% Cohort.all.sort_by(&:name).each do |cohort| %>
             <li><%= link_to cohort.name, cohort_path(cohort) %></li>
           <% end %>
         </ul>

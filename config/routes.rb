@@ -6,8 +6,12 @@ Rails.application.routes.draw do
 
   root   "dashboard#show"
 
-  get "/:username", to: "users#show",  as: :user
-  get "/graphs/d3", to: "data#show",   as: :graph
+  scope "", as: :user do
+    get   "/:username",      to: "users#show"
+    put   "/:username",      to: "users#update"
+    patch "/:username",      to: "users#edit"
+  end
+  get   "/:username/edit", to: "users#edit", as: :edit_user
 
   scope "/cohorts" do
     get "/:cohort",   to: "cohorts#show", as: :cohort
@@ -17,5 +21,4 @@ Rails.application.routes.draw do
     resources :users,     only: [:show, :index]
     resources :commits,   only: [:show, :index]
   end
-
 end

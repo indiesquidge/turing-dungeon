@@ -1,0 +1,9 @@
+<div class="text-center">
+  <h2>Please select your cohort</h2></br>
+
+  <%= form_for @user, url: user_path(@user), html: { method: :put } do |f| %>
+    <%= f.collection_select :cohort_id, Cohort.all.sort_by(&:name), :id, :name %></br></br>
+    <%= f.submit "Continue", class: "btn btn-default" %>
+  <% end %>
+</div>
+
