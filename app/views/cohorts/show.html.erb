@@ -10,6 +10,11 @@
   <div class="col-md-6">
     <h2 class="text-center"><i class="mega-octicon octicon-git-commit"></i></h2>
     <div id="github-feed">
+      <div class="text-center">
+        <% if @cohort.commits.empty? %>
+          <h3>No commits yet!</h3>
+        <% end %>
+      </div>
       <% @cohort.commits.each do |commit| %>
         <div class="well well-sm">
 

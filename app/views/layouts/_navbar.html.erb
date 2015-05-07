@@ -6,15 +6,15 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right pull-right">
-      <li class="dropdown">
-        <a data-toggle="dropdown" id="cohort-list"><i class="mega-octicon octicon-organization"></i></a>
-        <ul class="dropdown-menu">
-          <% Cohort.all.sort_by(&:name).each do |cohort| %>
-            <li><%= link_to cohort.name, cohort_path(cohort) %></li>
-          <% end %>
-        </ul>
-      </li>
       <% if current_user %>
+        <li class="dropdown">
+          <a data-toggle="dropdown" id="cohort-list"><i class="mega-octicon octicon-organization"></i></a>
+          <ul class="dropdown-menu">
+            <% Cohort.all.sort_by(&:name).each do |cohort| %>
+              <li><%= link_to cohort.name, cohort_path(cohort) %></li>
+            <% end %>
+          </ul>
+        </li>
         <li class="dropdown">
           <a data-toggle="dropdown" id="user-profile">
             <%= image_tag(current_user.image_url, size: "35", class: "img-responsive img-circle") %>

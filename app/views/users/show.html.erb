@@ -7,6 +7,11 @@
   </div>
   <div class="col-md-6" id="github-feed">
     <h2 class="text-center"><i class="mega-octicon octicon-git-commit"></i></h2>
+    <div class="text-center">
+      <% if @user.commits.empty? %>
+        <h3>No commits yet!</h3>
+      <% end %>
+    </div>
     <% @user.commits.reverse.each do |commit| %>
       <div class="well well-sm">
 
