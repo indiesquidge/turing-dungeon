@@ -18,12 +18,14 @@ RSpec.describe "User authentication", type: :feature do
   it "can logout if logged in" do
     visit root_path
     mock_omniauth_user
+    Cohort.create!(name: "1412")
 
     within(".nav") do
       find("#github-login").click
     end
 
     mock_github_service_request
+    click_on "Continue"
 
     within(".nav") do
       click_on "Logout"
