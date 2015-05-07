@@ -6,9 +6,12 @@ Rails.application.routes.draw do
 
   root   "dashboard#show"
 
-  get "/:username", to: "users#show", as: "user"
+  get "/:username", to: "users#show",  as: :user
+  get "/graphs/d3", to: "data#show",   as: :graph
 
-  get    "/d3",      to: "data#show"
+  scope "/cohorts" do
+    get "/:cohort",   to: "cohorts#show", as: :cohort
+  end
 
   namespace :api do
     resources :users,     only: [:show, :index]

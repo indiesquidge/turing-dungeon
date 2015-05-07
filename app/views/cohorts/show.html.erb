@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="col-md-6">
+    <h2 class="text-center">Cohort Members</h2>
+    <% @cohort.users.each do |user| %>
+      <div class="col-md-2">
+        <%= link_to image_tag(user.image_url, size: "60", class: "img-responsive img-circle avatar"), user %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <h2 class="text-center"><i class="mega-octicon octicon-git-commit"></i></h2>
+    <div id="github-feed">
+      <% @cohort.commits.each do |commit| %>
+        <div class="well well-sm">
+
+          <div id="commits">
+            <ul class="list-inline">
+              <li class="col-sm-2 col-xs-2 custom-col-sm">
+                <%= link_to image_tag(commit.user.image_url, class: "img-responsive img-circle avatar"), commit.user %>
+              </li>
+              <li><h3><%= link_to commit.user.nickname, commit.user %></h3></li></br>
+              <li><h6><%= link_to commit.repo, commit.repo_url %></h6></li></br>
+            </ul>
+            <h4><%= link_to commit.message, commit.message_url %></h4>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

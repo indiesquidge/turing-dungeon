@@ -5,7 +5,20 @@
       <%= link_to image_tag("turing-t.png", size: "20"), root_path %>
     </div>
 
-    <ul class="nav navbar-right pull-right">
+    <ul class="nav navbar-nav navbar-right pull-right">
+      <li>
+        <%= link_to graph_path do %>
+          <i class="mega-octicon octicon-graph"></i>
+        <% end %>
+      </li>
+      <li class="dropdown">
+        <a data-toggle="dropdown" id="cohort-list"><i class="mega-octicon octicon-organization"></i></a>
+        <ul class="dropdown-menu">
+          <% Cohort.all.each do |cohort| %>
+            <li><%= link_to cohort.name, cohort_path(cohort) %></li>
+          <% end %>
+        </ul>
+      </li>
       <% if current_user %>
         <li class="dropdown">
           <a data-toggle="dropdown" id="user-profile">
