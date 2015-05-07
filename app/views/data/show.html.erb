@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D3 - Data Driven Documents</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://underscorejs.org/underscore.js" charset="utf-8"></script>
+    <style type="text/css">
+
+      .bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px; /* Gets overriden by D3-assigned height below */
+        margin-right: 2px;
+      }
+
+      .bubble {
+        display: inline-block;
+        fill: purple;
+        fill-opacity: 0.5;
+        stroke: black;
+      }
+
+      .active {
+        fill: blue;
+        fill-capacity: 0.5;
+        stroke-width: 3px;
+      }
+
+      .axis path, .axis line {
+        fill: none;
+        stroke: #000;
+        stroke-width: 1px;
+        shape-rendering: crispEdges;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-sm-6 text-center" id="barChartArea"></div>
+      <div class="col-sm-6 text-center" id="bubbleChartArea"></div>
+      <button class="btn btn-primary col-sm-offset-7" onclick="update()">Update</button>
+    </div>
+    <script type="text/javascript">
+
+      var barDataset = _.map(_.range(15), function(i) {
+        return Math.random() * 100;
+      });
+
+      var margin = { top: 0, right: 0, bottom: 0, left: 0 };
+          w = 400 - margin.left - margin.right;
+          h = 300 - margin.top - margin.bottom;
+
+      var barSvg = d3.select("#barChartArea").append("svg")
+                     .attr("width", w + margin.left + margin.right)
+                     .attr("height", h + margin.top + margin.bottom)
+                     .append("g")
+                     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+      var xBarScale = d3.scale.ordinal()
+                        .domain(barDataset)
+                        .rangeBands([0,w], 0.1, 0.3);
+
+      var yBarScale = d3.scale.linear()
+                        .domain([0,d3.max(barDataset) * 1.1])
+                        .range([0,h]);
+
+      var colorScale = d3.scale.linear()
+                         .domain([0,d3.max(barDataset)])
+                         .range(["blue", "purple"]);
+
+      barSvg.selectAll("rect")
+            .data(barDataset)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", xBarScale)
+            .attr("y", function(d) {
+              return h - yBarScale(d);
+            })
+            .attr("width", xBarScale.rangeBand())
+            .attr("height", yBarScale)
+            .attr("fill", colorScale);
+
+// =============================================================================
+
+      var bubbleDataset = _.map(_.range(15), function(i) {
+        return {
+          x: Math.round(Math.random() * 100),
+          y: Math.round(Math.random() * 100),
+          r: Math.round(5 + Math.random() * 10)
+        };
+      });
+
+      var margin = { top: 20, right: 20, bottom: 60, left: 60 };
+          w = 400 - margin.left - margin.right;
+          h = 300 - margin.top - margin.bottom;
+
+      var bubbleSvg = d3.select("#bubbleChartArea").append("svg")
+                        .attr("width", w + margin.left + margin.right)
+                        .attr("height", h + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+      var xBubbleScale = d3.scale.linear()
+                           .domain([0,100])
+                           .range([0,w]);
+
+      var xAxis = d3.svg.axis()
+                    .scale(xBubbleScale)
+                    .orient("bottom")
+                    .ticks(5)
+                    .tickSize(5)
+                    .tickPadding(10);
+
+       bubbleSvg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0, " + h + ")")
+                .call(xAxis);
+
+      var yBubbleScale = d3.scale.linear()
+                           .domain([0,100])
+                           .range([h,0]);
+
+      var yAxis = d3.svg.axis()
+                    .scale(yBubbleScale)
+                    .orient("left")
+                    .ticks(5);
+
+       bubbleSvg.append("g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(0, 0)")
+                .call(yAxis);
+
+      bubbleSvg.selectAll("circle")
+               .data(bubbleDataset)
+               .enter()
+               .append("circle")
+               .attr("class", "bubble")
+               .attr("cx", function(d) {
+                 return xBubbleScale(d.x);
+               })
+               .attr("cy", function(d) {
+                 return yBubbleScale(d.y);
+               })
+               .attr("r", function(d) {
+                 return d.r;
+               })
+               .on("mouseover", function(d) {
+                 d3.select(this).classed("active", true);
+               })
+               .on("mouseout", function(d) {
+                 d3.select(this).classed("active", false);
+               })
+               .on("mousedown", function(d) {
+                 d3.select(this).attr("r", d.r * 2);
+               })
+               .on("mouseup", function(d) {
+                 d3.select(this).attr("r", d.r);
+               });
+
+      function steppedTransition(selection) {
+        selection.transition()
+                 .duration(500)
+                 .attr("cx", function(d) {
+                   return xBubbleScale(d.x);
+                 })
+                 .style("fill", "red")
+                 .transition()
+                 .duration(500)
+                 .attr("cy", function(d) {
+                   return yBubbleScale(d.y);
+                 })
+                 .style("fill", "green")
+                 .transition()
+                 .duration(500)
+                 .attr("r", function(d) {
+                   return d.r;
+                 })
+                 .style("fill", "blue");
+      }
+
+      function plainTransition(selection, dur) {
+        selection.transition()
+                 .duration(dur)
+                 .attr("cx", function(d) {
+                   return xBubbleScale(d.x);
+                 })
+                 .attr("cy", function(d) {
+                   return yBubbleScale(d.y);
+                 })
+                 .attr("r", function(d) {
+                   return d.r;
+                 })
+                 .style("fill", "blue");
+      }
+
+      function newData(datum) {
+        datum.x =  Math.round(Math.random() * 100);
+        datum.y =  Math.round(Math.random() * 100);
+        datum.r =  Math.round(5 + Math.random() * 10);
+      }
+
+      function update() {
+        bubbleSvg.selectAll("circle")
+                 .filter(function(d) {
+                   return d.x < 50;
+                 })
+                 .each(newData)
+                 .call(plainTransition, 1500);
+
+        bubbleSvg.selectAll("circle")
+                 .filter(function(d) {
+                   return d.x > 50;
+                 })
+                 .each(newData)
+                 .call(steppedTransition);
+      }
+
+    </script>
+  </body>
+</html>

@@ -8,8 +8,11 @@ Rails.application.routes.draw do
 
   get "/:username", to: "users#show", as: "user"
 
+  get    "/d3",      to: "data#show"
+
   namespace :api do
     resources :users,     only: [:show, :index]
     resources :commits,   only: [:show, :index]
   end
+
 end
