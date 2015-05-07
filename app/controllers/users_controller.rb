@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def show
+    confirm_user_cohort
     @user = User.find_by(nickname: params[:username])
   end
 
