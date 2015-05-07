@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:carhartl/emoji-rspec.git
+  revision: 5d1cf255cccb102d58b21661aa7b42bec984a9f8
+  branch: rspec-3
+  specs:
+    emoji-rspec (2.0.0)
+      rspec-core (~> 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -232,6 +240,7 @@ DEPENDENCIES
   capybara
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
+  emoji-rspec!
   faker
   faraday
   figaro

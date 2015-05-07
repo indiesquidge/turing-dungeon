@@ -33,4 +33,5 @@ group :test do
   gem "codeclimate-test-reporter", require: nil
   gem "simplecov", require: false
   gem "webmock", "~> 1.21"
+  gem "emoji-rspec", git: "git@github.com:carhartl/emoji-rspec.git", branch: "rspec-3"
 end
