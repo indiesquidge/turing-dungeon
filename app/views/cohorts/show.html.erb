@@ -3,7 +3,7 @@
     <h2 class="text-center">Cohort Members</h2>
     <% @cohort.users.each do |user| %>
       <div class="col-md-2">
-        <%= link_to image_tag(user.image_url, size: "60", class: "img-responsive img-circle avatar"), user %>
+        <%= link_to image_tag(user.image_url, size: "60", class: "img-responsive img-circle avatar", id: "cohort-user"), user %>
       </div>
     <% end %>
   </div>
