@@ -9,7 +9,7 @@
       <li class="dropdown">
         <a data-toggle="dropdown" id="cohort-list"><i class="mega-octicon octicon-organization"></i></a>
         <ul class="dropdown-menu">
-          <% Cohort.all.each do |cohort| %>
+          <% Cohort.all.sort_by(&:name).each do |cohort| %>
             <li><%= link_to cohort.name, cohort_path(cohort) %></li>
           <% end %>
         </ul>
