@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def show
-    @commits = Commit.latest_commits
+    @commits = GithubService.new(env, env).latest_commits(User.all, 10)
   end
 end

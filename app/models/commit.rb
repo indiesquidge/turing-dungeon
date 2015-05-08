@@ -6,7 +6,7 @@ class Commit < ActiveRecord::Base
 
   def self.latest_commits
     User.all.each do |user|
-      GithubService.event_data(user.nickname, user.name, ENV["GITHUB_ID"], ENV["GITHUB_SECRET"]).each do |event, commit|
+      GithubService.new(ENV["GITHUB_ID"], ENV["GITHUB_SECRET"]).event_data(user.nickname, user.name).each do |event, commit|
         user.commits.create(repo: event[:repo][:name],
                             message: commit[:message],
                             sha: commit[:sha],
